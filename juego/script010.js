@@ -3,6 +3,7 @@ var canvas, ctx;
 var x,y;
 var imagen;
 var radianes;
+var enemigo, bala;
 var BARRA=32;
 var teclaPulsada=null;
 var tecla_array=new Array();
@@ -153,6 +154,14 @@ function pinta(){
     }
 
 }
+
+function anima(){
+    requestAnimationFrame(anima);
+    verifica();
+    pinta();
+    colisiones();
+}
+
 document.addEventListener("mousemove", function(e){
     var pos=ajusta(e.clientX,e.clientY);
     var x=pos.x;
@@ -189,6 +198,7 @@ function inicio(){
     anima()
 }
 
+
 function lanzaEnemigo(){
     var lado=Math.floor(Math.random()*4)+1;
     //Izquierda
@@ -209,4 +219,21 @@ function lanzaEnemigo(){
     setTimeout(lanzaEnemigo,2000);
 }
 
+function colisiones(){
+    for(var i=0; i<enemigos_array.length; i++){
+        for(var j=0; j<enemigos_array.length; j++){
+            enemigo=enemigos_array[i];
+            bala=balas_array[j];
+            if(enemigo !=null && bala!=null){
+                if(bala.x>enemigo.x && bala.x<enemigo.x+enemigo.w && bala.y>enemigo.y && bala.y<enemigo.y+enemigo.w){
+                    enemigo.vive=false;
+                    enemigos_array[i]=null;
+                    balas_array[i]=null;
+                    puntos +=10;
+                    boing.pĺay();
+                } 
+            }
+        }
 
+    }
+}
