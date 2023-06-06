@@ -1,0 +1,232 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+section{
+    background-color: #D6FFF3;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    width: 600px;
+    height: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+img{
+    height: 80px;
+    width: 80px;
+    z-index: 999;
+}
+div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contenido{
+    margin-bottom: 50px;
+}
+h1{
+    font-family: monospace;
+    margin-bottom: 15px;
+    font-size: 70px;
+}
+.linea{
+    position: absolute;
+    display: flex;
+    width: 800px;
+    border-bottom: 3px solid black;    
+}
+.margen{
+    width: 95%;
+    height: 90%;
+    border: 3px solid #3653F8;
+}
+.fa-brands{
+    position: absolute;
+    font-size: 65px;
+}
+#twitter{
+    bottom: 80px;
+    left: 80px;
+}
+#telegram{
+    bottom: 140px;
+    left: 230px;
+}
+#youtube{
+    bottom: 30px;
+    left: 320px;
+}
+#tiktok{
+    bottom: 70px;
+}
+#tumblr{
+    bottom: 30px;
+    right: 170px;
+}
+#discord{
+    bottom: 120px;
+    right: 390px;
+}
+#snapchat{
+    top: 180px;
+    right: 120px;
+}
+#pinterest{
+    top: 60px;
+    right: 530px;
+}
+#whatsapp{
+    top: 30px;
+    right: 230px;
+}
+#reddit{
+    top: 70px;
+    left: 320px;
+}
+#facebook{
+    top: 70px;
+    left: 110px;
+}
+#instagram{
+    left: 50px;
+}
+.boton{
+    bottom: -25px;
+    display: flex;
+    height: 50px;
+    width: 150px;
+    position: absolute;
+    background-color: #D6FFF3;
+}
+button {
+    font-size: 13px;
+    position: absolute;
+    font-weight: bold;
+    color: white;
+    border-radius: 2rem;
+    width: 120px;
+    height: 42.66px;
+    border: none;
+    background-color: #3653F8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0.2rem #2b2929;
+    z-index: 999;
+  }
+  .span-mother{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .span-mother2{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  button .span-mother {
+    display: flex;
+    overflow: hidden;
+  }
+  button:hover .span-mother {
+    position: absolute;
+  }
+  button:hover{
+    cursor: pointer;
+    box-shadow: 0 0.4rem #2b2929;
+    transform: translateY(-.2rem);
+  }
+  button:active{
+    background: #8c9aec;
+    box-shadow: 0 0.1rem #2b2929;
+    font-size: 15px;
+    transform: translateY(.3rem);
+    transition: .1s;
+  }
+  button:hover .span-mother span {
+    transform: translateY(2em);
+  }
+  button .span-mother span:nth-child(1) {
+    transition: .2s;
+  }
+  button .span-mother span:nth-child(2) {
+    transition: .3s;
+  }
+  button .span-mother span:nth-child(3) {
+    transition: .4s;
+  }
+  button .span-mother span:nth-child(4) {
+    transition: .5s;
+  }
+  button .span-mother span:nth-child(5) {
+    transition: .6s;
+  }
+  button .span-mother span:nth-child(6) {
+    transition: .7s;
+  }
+  button .span-mother span:nth-child(7) {
+    transition: .8s;
+  }
+  button .span-mother span:nth-child(8) {
+    transition: .9s;
+  }
+  button .span-mother span:nth-child(9) {
+    transition: 1s;
+  }
+  button .span-mother span:nth-child(10) {
+    transition: 1.1s;
+  }
+  button .span-mother2 {
+    display: flex;
+    position: absolute;
+    overflow: hidden;
+  }
+  button .span-mother2 span {
+    transform: translateY(-2em);
+  }
+  button:hover .span-mother2 span {
+    transform: translateY(0);
+  }
+  button .span-mother2 span {
+    transition: .2s;
+  }
+  button .span-mother2 span:nth-child(2) {
+    transition: .3s;
+  }
+  button .span-mother2 span:nth-child(3) {
+    transition: .4s;
+  }
+  button .span-mother2 span:nth-child(4) {
+    transition: .5s;
+  }
+  button .span-mother2 span:nth-child(5) {
+    transition: .6s;
+  }
+  button .span-mother2 span:nth-child(6) {
+    transition: .7s;
+  }
+  button .span-mother2 span:nth-child(7) {
+    transition: .8s;
+  }
+  button .span-mother2 span:nth-child(8) {
+    transition: .9s;
+  }
+  button .span-mother2 span:nth-child(9) {
+    transition: 1s;
+  }
+  button .span-mother2 span:nth-child(10) {
+    transition: 1.1s;
+  }
