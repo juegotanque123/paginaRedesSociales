@@ -70,7 +70,7 @@ function Enemigo(x,y){
     this.inicioY=y;
     this.estado=1;
     this.r=10;
-    this.w=r*2;
+    this.w=this.r*2;
     this.vive=true
     this.velocidad=3+Math.random();
     this.color=colorEnemigo[Math.floor(Math.random()*colorEnemigo.length)];
@@ -138,31 +138,20 @@ function anima(){
 
 //Listener
 
-document.addEventListener("mousemove", function(e){
-    var pos=ajusta(e.clientX,e.clientY);
-    var x=pos.x;
-    var y=pos.y;
-    var dx=x-centroX;
-    var dy=y-centroY;
-    radianes=Math.atan2(dy,dx);
-})
+
 
 document.addEventListener("keydown", function(e){
     teclaPulsada=e.keyCode;
     tecla_array[teclaPulsada]=true;
 });
 
-function ajusta(xx,yy){
-    var pos=canvas.getBoundingClientRect();
-    var x=xx-pos.left;
-    var y=yy-pos.top;
-    return{x:x,y:y}
-}
 
 function verifica(){
     if(tecla_array[BARRA]){
-        balas_array.push(new Bala(centroX+Math.cos(radianes)*35, centroY+Math.sin(radianes)*35, radianes))
-        tecla_array[BARRA]=false;
+        var balaX = centroX + Math.cos(radianes) * 35;
+        var balaY = centroY + Math.sin(radianes) * 35;
+        balas_array.push(new Bala(balaX, balaY, radianes));
+        tecla_array[BARRA] = false;
         disparo.play();
     }
 }
@@ -195,13 +184,16 @@ function colisiones(){
         for(var j=0; j<enemigos_array.length; j++){
             enemigo=enemigos_array[i];
             bala=balas_array[j];
-            if(enemigo !=null && bala!=null){
+
+            if(enemigo !=null && bala !=null){
+
                 if(bala.x>enemigo.x && bala.x<enemigo.x+enemigo.w && bala.y>enemigo.y && bala.y<enemigo.y+enemigo.w){
+
                     enemigo.vive=false;
                     enemigos_array[i]=null;
                     balas_array[j]=null;
                     puntos +=10;
-                    boing.pĺay();
+                    boing.play();
                 } 
             }
         }
@@ -218,6 +210,7 @@ function colisiones(){
 
     }
 
+
 }
 
 
@@ -229,7 +222,7 @@ function gameOver(){
 
 function score(){
     ctx.save();
-    ctx.fillStyle="white";
+    ctx.fillStyle="black";
     ctx.clearRect(0,0, BASE,40);
     ctx.font="bold 20px Courier";
     ctx.fillText("SCORE: "+puntos+" VIDAS:"+vidas, 10,20);
@@ -237,7 +230,7 @@ function score(){
 }
 
 function mensaje(cadena){
-    var lon=(canvas.width-(53*cadena.lenght))/2;
+    var lon=(canvas.width-(53*cadena.length))/2-70;
     ctx.save();
     ctx.fillStyle="black";
     ctx.clearRect(0,0,w,h);
@@ -268,7 +261,9 @@ window.onload=function()
             var intro=document.getElementById("intro");
             var fin=document.getElementById("fin");
             var boom=document.getElementById("boom")
-            intro.play();
+            document.addEventListener("click", function() {
+                intro.play();
+              });
             w=BASE;
             h=ALTURA;
             centroX=w/2;
@@ -290,5 +285,18 @@ window.onload=function()
     }
 
 }
+function ajusta(xx,yy){
+    var pos=canvas.getBoundingClientRect();
+    var x=xx-pos.left;
+    var y=yy-pos.top;
+    return{x:x,y:y}
+}
+document.addEventListener("mousemove", function(e){
+    var pos=ajusta(e.clientX,e.clientY);
+    var x=pos.x;
+    var y=pos.y;
+    var dx=x-centroX;
+    var dy=y-centroY;
+    radianes=Math.atan2(dy,dx);
+})
 
-console.log(enemigos_array.length)
