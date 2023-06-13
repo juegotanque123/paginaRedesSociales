@@ -1,4 +1,5 @@
 body{
+    background-image: url(../img/social.jpg);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,3 +11,9 @@ body{
     background-color: lightgray;
 
 }
+#imagen-container img {
+    display: none;
+  }
+  .fa-facebook::before {
+    content: "\f09a";
+  }

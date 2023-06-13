@@ -11,6 +11,8 @@ var balas_array=new Array();
 var enemigos_array=new Array();
 var colorEnemigo=["red","blue","black","white","yellow","pink","purple"];
 var simboloEnemigo=["facebook", "discord","square-whatsapp", "pinterest","twitter", "telegram", "youtube","tiktok", "-square-instagram", "square-snapchat","reddit", "square-tumblr"]
+
+
 var colorBala="red";
 var centroX,centroY;
 var w,h;
@@ -34,7 +36,7 @@ function Bala(x,y,radianes){
     this.radianes=radianes;
     this.dibuja=function(){
         ctx.save();
-        ctx.fillStyle=colorBala;
+        ctx.fillStyle="red";
         this.x +=Math.cos(this.radianes)*this.velocidad;
         this.y +=Math.sin(this.radianes)*this.velocidad;
         ctx.fillRect(this.x,this.y, this.w, this.w);
@@ -43,7 +45,7 @@ function Bala(x,y,radianes){
     }
 }
 
-function Tanque(x,y,radio){
+function Tanque(x,y,radio, imagenSeleccionada){
     this.x=x;
     this.y=y;
     this.radio=radio;
@@ -52,7 +54,6 @@ function Tanque(x,y,radio){
     this.w=0;
     this.h=0;
     this.dibuja=function(){
-        imagen.src="../img/tanque.png";
         imagen.onload=function(){
             this.w=BASE;
             this.h=ALTURA;
@@ -75,14 +76,36 @@ function Enemigo(x,y){
     this.w=this.r*2;
     this.vive=true
     this.velocidad=3+Math.random();
-    this.color=colorEnemigo[Math.floor(Math.random()*colorEnemigo.length)];
+    var ColorR=Math.floor(Math.random()*256);
+    var ColorG=Math.floor(Math.random()*256);
+    var ColorB=Math.floor(Math.random()*256);
+    this.color=`rgba(${ColorR},${ColorG},${ColorB}, 1)`;
+
+    //this.color=colorEnemigo[Math.floor(Math.random()*colorEnemigo.length)];
     this.dibuja=function(){
         if(this.n<100 && this.vive){
+            
             ctx.save();
-            ctx.fillStyle=this.color;
-            ctx.beginPath();
-            ctx.arc(this.x,this.y, this.r, 0,2*Math.PI);
-            ctx.fill();
+                  // Si el color es azul, dibujar la imagen
+            if (ColorR < 50 && ColorG < 50 && ColorB > 200) {
+                var img = new Image();
+                img.src = "../img/ficon.jpg";
+                ctx.drawImage(img, this.x - this.r, this.y - this.r, this.w, this.w);
+            }else if(ColorR >200 && ColorG < 50 && ColorB <50){
+                var img = new Image();
+                img.src = "../img/redguy.png";
+                ctx.drawImage(img, this.x - this.r, this.y - this.r, this.w, this.w);
+
+            }else if(ColorR >200 && ColorG < 50 && ColorB <50){
+                var img = new Image();
+                img.src = "../img/twitch.png";
+                ctx.drawImage(img, this.x - this.r, this.y - this.r, this.w, this.w);
+            }else {
+                ctx.fillStyle=this.color;
+                ctx.beginPath();
+                ctx.arc(this.x,this.y, this.r, 0,2*Math.PI);
+                ctx.fill();
+            }
             this.n +=0.5;
             this.x=centroX*this.n/100+this.inicioX*(100-this.n)/100;
             this.y=centroY*this.n/100+this.inicioY*(100-this.n)/100;
@@ -94,7 +117,7 @@ function Enemigo(x,y){
             ctx.font = "bold 12px Arial";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillText("\uf09a", this.x, this.y); // Reemplaza "A" con la letra deseada
+            ctx.fillText("", this.x, this.y);
             ctx.restore();
         }
 
@@ -218,6 +241,9 @@ function colisiones(){
                 if(vidas==0)gameOver()
             }
         }
+        if(puntos==100){
+            victory()
+        }
 
     }
 
@@ -227,8 +253,25 @@ function colisiones(){
 
 function gameOver(){
     mensaje("GAME OVER");
+    ctx.save();
+    ctx.fillStyle="black";
+    ctx.clearRect(0,0, BASE,40);
+    ctx.font="bold 20px Courier";
+    ctx.fillText("SCORE: "+puntos,BASE/2-50,ALTURA/2+50);
+    ctx.restore();
     finJuego=true;
     fin.play();
+}
+function victory(){
+    mensaje("GANASTE");
+    ctx.save();
+    ctx.fillStyle="black";
+    ctx.clearRect(0,0, BASE,40);
+    ctx.font="bold 20px Courier";
+    ctx.fillText("SCORE: "+puntos+" VIDAS:"+vidas, BASE/2-100,ALTURA/2+50);
+    ctx.restore();
+    finJuego=true;
+    plants.play()
 }
 
 function score(){
@@ -253,8 +296,51 @@ function sonar(){
 
 }
 
+function mostrarImagenes() {
+    var imagenes = document.querySelectorAll("#imagen-container img");
+  
+    for (var i = 0; i < imagenes.length; i++) {
+      imagenes[i].style.display = "inline-block";
+    }
+  
+  }
+
+
+function iniciarJuego(imagenSeleccionada) {
+    var imagenes = document.querySelectorAll("#imagen-container img");
+  
+    for (var i = 0; i < imagenes.length; i++) {
+      imagenes[i].style.display = "none";
+    }
+  
+    // Aquí puedes iniciar el juego con la imagen seleccionada
+    // y realizar otras acciones necesarias
+    if(imagenSeleccionada=="../img/tanquew.png"){
+        var timg="../img/tanquew.png"
+
+
+    }else if(imagenSeleccionada=="../img/tanquef.png"){
+        var timg="../img/tanquef.png"
+
+
+    }else if(imagenSeleccionada=="../img/tanquet.png"){
+        var timg="../img/tanquet.png"
+
+    }
+    imagen.src=timg
+
+    
+    inicio();
+
+    setTimeout(inicio, 3500);
+
+    console.log("Juego iniciado con la imagen:", imagenSeleccionada);
+  }
+
+
 window.onload=function()
 {
+    mostrarImagenes()
 
     canvas=document.getElementById("miCanvas");
     canvas.width=BASE;
@@ -271,7 +357,9 @@ window.onload=function()
             var disparo=document.getElementById("disparo");
             var intro=document.getElementById("intro");
             var fin=document.getElementById("fin");
-            var boom=document.getElementById("boom")
+            var boom=document.getElementById("boom");
+            var plants=document.getElementById("plants");
+
             document.addEventListener("click", function() {
                 intro.play();
               });
@@ -282,11 +370,6 @@ window.onload=function()
             imagen=new Image();
             tanque= new Tanque();
             mensaje("TANQUES");
-
-
-            inicio();
-
-            setTimeout(inicio, 3500);
 
 
         }   
